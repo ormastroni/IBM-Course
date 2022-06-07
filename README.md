@@ -1,3 +1,3 @@
-# IBM-Course
+# Applied Data Science Capstone (Coursera)
 
-My Jupyter notebooks developed in IBM Watson Studio for IBM course in Coursera
+This repository contains my Jupyter notebooks written in IBM Watson Studio for the final IBM course in Coursera
