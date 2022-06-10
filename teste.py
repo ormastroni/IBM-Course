@@ -60,9 +60,9 @@ def get_pie(site):
                      names='Launch Site', 
                      title='Total Success Launches By Site')        
     else:
-        filtered_df = spacex_df[spacex_df['Launch Site'] == site]
-        filtered_df = filtered_df.groupby('class').count().reset_index()        
-        fig = px.pie(filtered_df, 
+        df_filtered = spacex_df[spacex_df['Launch Site'] == site]
+        df_filtered = df_filtered.groupby('class').count().reset_index()        
+        fig = px.pie(df_filtered, 
                      values='Unnamed: 0', 
                      names='class', 
                      title='Total Launches for site {}'.format(site))        
@@ -77,16 +77,16 @@ def get_pie(site):
 def get_scatter(site, payload_range):
     print('Params: {} {}'.format(site, payload_range))
     if site == 'ALL':
-        filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= int(payload_range[0])) &
+        df_filtered = spacex_df[(spacex_df['Payload Mass (kg)'] >= int(payload_range[0])) &
                                 (spacex_df['Payload Mass (kg)'] <= int(payload_range[1]))
                                ]
-        fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category', title='All sites - payload mass between {:8,d}kg and {:8,d}kg'.format(int(payload_range[0]),int(payload_range[1])))
+        fig = px.scatter(df_filtered, x='Payload Mass (kg)', y='class', color='Booster Version Category', title='All sites - payload mass between {:8,d}kg and {:8,d}kg'.format(int(payload_range[0]),int(payload_range[1])))
     else:
-        filtered_df = spacex_df[(spacex_df['Launch Site'] == site) & 
+        df_filtered = spacex_df[(spacex_df['Launch Site'] == site) & 
                                 (spacex_df['Payload Mass (kg)'] >= int(payload_range[0])) &
                                 (spacex_df['Payload Mass (kg)'] <= int(payload_range[1]))
                                ]
-        fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category', title='Site {} - payload mass between {:8,d}kg and {:8,d}kg'.format(site,int(payload_range[0]),int(payload_range[1])))
+        fig = px.scatter(df_filtered, x='Payload Mass (kg)', y='class', color='Booster Version Category', title='Site {} - payload mass between {:8,d}kg and {:8,d}kg'.format(site,int(payload_range[0]),int(payload_range[1])))
     
     return fig
 
